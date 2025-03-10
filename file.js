@@ -4,6 +4,8 @@ document.addEventListener("DOMContentLoaded",()=>{
     let ties=0;
 
     const showHumanScore=document.querySelector(".humanScore");
+    const showTieScore=document.querySelector(".tie");
+    const showComputerScore=document.querySelector(".computerScore");
     const scissors=document.querySelector(".sci");
     const rock=document.querySelector(".rock");
     const paper=document.querySelector(".paper");
@@ -35,31 +37,35 @@ document.addEventListener("DOMContentLoaded",()=>{
     }
 
     function playRound(humanChoice, computerChoice) {
-        if(humanChoice=="paper" && computerChoice=="rock"){
+        if(humanChoice=="paper" && computerChoice=="rock"||humanChoice=="scissors" && computerChoice=="paper"||humanChoice=="rock" && computerChoice=="scissors"){
             humanScore++;
+            console.log("Human wins!!!");
+            if(humanScore==5 || computerScore ==5){
+                humanScore=0;
+                computerScore=0;
+                ties=0;
+                showHumanScore.textContent=humanScore;
+                showComputerScore.textContent=computerScore;
+                showTieScore.textContent=ties;
+            } 
             showHumanScore.textContent=humanScore;
-            console.log("Human wins!!! Paper beats rock");
-        }else if(humanChoice=="paper" && computerChoice=="scissors"){
+        }else if(humanChoice=="paper" && computerChoice=="scissors"||humanChoice=="scissors" && computerChoice=="rock"||humanChoice=="rock" && computerChoice=="paper"){
             computerScore++;
-            console.log("Computer wins!!! Scissors beats paper");
-        }else if(humanChoice=="scissors" && computerChoice=="rock"){
-            humanScore++;
-            showHumanScore.textContent=humanScore;
-            console.log("Computer wins!!! Rock beats scissors");
-        }else if(humanChoice=="scissors" && computerChoice=="paper"){
-            humanScore++;   
-            showHumanScore.textContent=humanScore;
-            console.log("Human wins!!! Scissors beats paper");
-        }else if(humanChoice=="rock" && computerChoice=="paper"){
-            computerScore++;
-            console.log("Computer wins!!! Paper beats rock");
-        }else if(humanChoice=="rock" && computerChoice=="scissors"){
-            humanScore++;
-            showHumanScore.textContent=humanScore;
-            console.log("Human wins!!! Rock beats scissors");
+            console.log("Computer wins!!!");
+            if(humanScore==5 || computerScore ==5){
+                humanScore=0;
+                computerScore=0;
+                ties=0;
+                showHumanScore.textContent=humanScore;
+                showComputerScore.textContent=computerScore;
+                showTieScore.textContent=ties;
+            } 
+            showComputerScore.textContent=computerScore;
         }else{
             ties++;
+            showTieScore.textContent=ties;
         }
-    } 
+    }
+
 });
 
